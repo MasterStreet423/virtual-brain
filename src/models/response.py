@@ -1,9 +1,9 @@
 import pydantic
-
+from typing import Literal
 
 class ResponseFormat(pydantic.BaseModel):
     # needTalk: bool
-    necesita_recordar: bool
-    para_recordar: str
-    mensaje: str
+    action: Literal["remember", "add_acquaintance","leave","none"]
+    action_data: str
+    respuesta: str
     emocion_actual: str

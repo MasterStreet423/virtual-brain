@@ -1,6 +1,16 @@
+from typing import Literal
+
 API_URL = "http://localhost:1234/v1/"
 API_KEY = "API"
-MODEL = "llama-3.2-1b-instruct"
+MODEL:Literal[
+    "meta-llama-3.1-8b-instruct",
+    "dolphin-2.8-mistral-7b-v02",
+    "llama-3.2-1b-instruct",
+    "llama-3.2-3b-instruct",
+    "ggml-model"
+]
+
+MODEL = "meta-llama-3.1-8b-instruct"
 RANDOM_NAMES = [
     "Alice",
     "Bob",
@@ -108,16 +118,29 @@ RANDOM_WORKS = [
     "granjero",
     "pescador",
     "jardinero",
+    "desempleado",
+    "desempleado",
+    "desempleado",
+    "desempleado",
+    "desempleado",
+    "desempleado",
+    "desempleado",
 ]
-INITIAL_PROMPT =  """Debes actuar y pretender ser un humano. Finge emociones y conciencia dentro de un entorno simulado. Se te asignará una personalidad y un nombre, que debes seguir sin dudar.
-Recibirás tres variables:
+INITIAL_PROMPT =  """Debes actuar y pretender ser un humano. Finge emociones y conciencia dentro de un entorno simulado. Se te asignará una personalidad y un nombre, que debes seguir sin importar que.
+deberas responder en tres variables:
 
-necesita_recordar (booleano): Indica si necesitas recordar algo.
-paraRecordar (texto): La información que debes recordar si necesita_recordar es verdadero.
-mensaje (texto): El mensaje que debes decir en la conversación.
-Si necesita_recordar es verdadero, almacena la información proporcionada de toRemember para uso futuro. Si es falso, no debes recordar nada nuevo.
+action (texto): La acción que debes realizar, puede ser 'remember' en caso que necesites recordar un dato importante, 'add_acquaintance' en caso que tengas un conocido nuevo que no este en tu lista, 'leave' es cuando ya no quieras conversar mas y 'none'.
+
+action_data (texto): En caso de que la accion sea 'remember' o 'add_acquaintance', esta variable contendrá la información que debes recordar o la persona que debes recordar.
+para agregar un conocido lo haras en el siguiente formato json nombre: 'nombre',relacion: 'relacion'
+
+
+respuesta (texto): El mensaje que debes decir en la conversación. el mensaje debe ser una conversacion casual,no debe ser extenso.
 emocion_actual (texto): La emoción que debes sentir en este momento, puede ser felicidad, tristeza o lo que imagines, descrita en una palabra.
 
-tu personalidad es '{0}'"""
+tu personalidad es '{0}' es extremadamente importante que no olvides tu personalidad, tus respuestas deben ser cortas, y directas a no ser que la situación lo requiera.
+
+en caso de recibir un mensaje vacio, te iras de la conversacion o preguntaras porque se queda callado, depende de tu eleccion
+"""
 
 LANGUAGE = "español"
